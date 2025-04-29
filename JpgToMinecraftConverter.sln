@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JpgToMinecraftConverter", "JpgToMinecraftConverter.csproj", "{CBBAFFE1-D8D0-10EE-2942-FE326D4398A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBBAFFE1-D8D0-10EE-2942-FE326D4398A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBBAFFE1-D8D0-10EE-2942-FE326D4398A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBBAFFE1-D8D0-10EE-2942-FE326D4398A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBBAFFE1-D8D0-10EE-2942-FE326D4398A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C7C0B6E0-BEE6-4DB4-89FE-F3E675782D44}
+	EndGlobalSection
+EndGlobal
