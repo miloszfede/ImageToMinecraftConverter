@@ -73,6 +73,23 @@ class Program
             blockGrid[y, x] = closestBlock;
         }
 
+        Dictionary<string, Image<Rgba32>> blocksToPngs = new Dictionary<string, Image<Rgba32>>();
+        foreach (string blockName in blockGrid)
+        {
+            if (!blocksToPngs.ContainsKey(blockName))
+            {
+                string path = Path.Combine(blocksDirectory, blockName + ".png");
+                Image<Rgba32> blockImage = Image.Load<Rgba32>(path);
+                blocksToPngs[blockName] = blockImage;
+            }
+            System.Console.WriteLine(KeyValuePair.Create(blockName, blocksToPngs[blockName]));
+        }
 
+
+        using(Image<Rgba32> minecraftPixelImage = new(imageToLoad.Width, imageToLoad.Height))
+        {
+
+        }
+         
     }
 }
