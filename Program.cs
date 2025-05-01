@@ -2,6 +2,7 @@
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 
+
 class Program
 {
     private static void Main()
@@ -21,6 +22,7 @@ class Program
             image.CopyPixelDataTo(pixelArray);
 
             Dictionary<Rgba32, int> colorCount = new Dictionary<Rgba32, int>();
+
             foreach (Rgba32 pixel in pixelArray)
             {
                 if (colorCount.ContainsKey(pixel))
@@ -37,9 +39,13 @@ class Program
             blockColors[fileName] = mostCommonColor;
             
         }
-        
-        using Image<Rgba32> imageToLoad = Image.Load<Rgba32>("/Users/miloszfede/Projects/JpgToMinecraftConverter/luffymc.png");
-        imageToLoad.Mutate(x => x.Resize(100, 100)); 
+        int blockWidth = 256;
+        int blockHeight = 256;
+        int tileSize = 16;
+
+
+        using Image<Rgba32> imageToLoad = Image.Load<Rgba32>("/Users/miloszfede/Projects/JpgToMinecraftConverter/luffyo.png");
+        imageToLoad.Mutate(x => x.Resize(blockWidth,blockHeight)); 
         Rgba32[] pixelArrayToLoad = new Rgba32[imageToLoad.Width * imageToLoad.Height];
         imageToLoad.CopyPixelDataTo(pixelArrayToLoad);
 
@@ -74,22 +80,37 @@ class Program
         }
 
         Dictionary<string, Image<Rgba32>> blocksToPngs = new Dictionary<string, Image<Rgba32>>();
+
         foreach (string blockName in blockGrid)
         {
             if (!blocksToPngs.ContainsKey(blockName))
             {
                 string path = Path.Combine(blocksDirectory, blockName + ".png");
                 Image<Rgba32> blockImage = Image.Load<Rgba32>(path);
+                blockImage.Mutate(x => x.Resize(tileSize, tileSize));
                 blocksToPngs[blockName] = blockImage;
             }
             System.Console.WriteLine(KeyValuePair.Create(blockName, blocksToPngs[blockName]));
         }
 
-
-        using(Image<Rgba32> minecraftPixelImage = new(imageToLoad.Width, imageToLoad.Height))
+        using(Image<Rgba32> minecraftPixelImage = new(blockWidth * tileSize, blockHeight * tileSize))
         {
-
+            for (int i = 0; i <blockGrid.GetLength(0); i++)
+        {
+            for (int j = 0; j <blockGrid.GetLength(1);j++)
+            {
+                string blockName = blockGrid[i,j];
+                if (blocksToPngs.ContainsKey(blockName))
+                {
+                    Image<Rgba32> blockImage = blocksToPngs[blockName];
+                    var destX = j * tileSize;
+                    var destY = i * tileSize; 
+                    minecraftPixelImage.Mutate(ctx => ctx.DrawImage(blockImage, new Point(destX, destY), 1f));
+                }
+            }
         }
-         
+        minecraftPixelImage.Save("output.png");
+        }
+    
     }
 }
