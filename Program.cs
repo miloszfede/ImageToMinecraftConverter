@@ -44,7 +44,7 @@ class Program
         int tileSize = 16;
 
 
-        using Image<Rgba32> imageToLoad = Image.Load<Rgba32>("/Users/miloszfede/Projects/JpgToMinecraftConverter/luffyo.png");
+        using Image<Rgba32> imageToLoad = Image.Load<Rgba32>("/Users/miloszfede/Projects/JpgToMinecraftConverter/IMG_4670.png");
         imageToLoad.Mutate(x => x.Resize(blockWidth,blockHeight)); 
         Rgba32[] pixelArrayToLoad = new Rgba32[imageToLoad.Width * imageToLoad.Height];
         imageToLoad.CopyPixelDataTo(pixelArrayToLoad);
