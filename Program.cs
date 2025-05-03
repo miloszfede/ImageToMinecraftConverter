@@ -114,9 +114,16 @@ namespace JpgToMinecraftConverter
                 minecraftPixelImage.Save("output.png");
             }
             Dictionary<string, (byte blockId, byte dataId)> blocksToIds = new Dictionary<string, (byte blockId, byte dataId)>();
-            List<BlockInfo>? blockInfos = JsonSerializer.Deserialize<List<BlockInfo>>(File.ReadAllText("/Users/miloszfede/Projects/JpgToMinecraftConverter/static/blocks.json"));
-
-
+            List<BlockInfo>? blockInfos = JsonSerializer.Deserialize<List<BlockInfo>>
+            (File.ReadAllText("/Users/miloszfede/Projects/JpgToMinecraftConverter/static/blocks.json"));
+            if (blockInfos != null)
+            {
+                foreach (var block in blockInfos)
+                {
+                    string name = Path.GetFileNameWithoutExtension(block.texture_image);
+                    blocksToIds[name] = ((byte)block.block_id, (byte)block.data_id);
+                }
+            }
         }
     }
 }
