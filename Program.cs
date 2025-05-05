@@ -125,6 +125,13 @@ namespace JpgToMinecraftConverter
                 }
             }
 
+            //byte[] Blocks(){
+            //Blocks.Size = blockWidth * blockHeight * 1;
+            //for (i = 0; i <= blockGrid.Length; i++) {
+            // 
+            //}
+            //}
+
 
         }
     }
