@@ -124,15 +124,22 @@ namespace JpgToMinecraftConverter
                     blocksToIds[name] = ((byte)block.block_id, (byte)block.data_id);
                 }
             }
-
-            //byte[] Blocks(){
-            //Blocks.Size = blockWidth * blockHeight * 1;
-            //for (i = 0; i <= blockGrid.Length; i++) {
-            // 
-            //}
-            //}
-
-
+            byte[] Blocks = new byte[blockWidth * blockHeight];
+            byte[] Data = new byte[blockWidth * blockHeight];
+            for (int z = 0; z < blockGrid.GetLength(0); z++)
+            {
+                for (int x = 0; x < blockGrid.GetLength(1); x++)
+                {
+                    int index = z * blockGrid.GetLength(1) + x;
+                    string blockName = blockGrid[z, x];
+                    if (blocksToIds.ContainsKey(blockName))
+                    {
+                        (byte blockId, byte dataId) = blocksToIds[blockName];
+                        Blocks[index] = blockId;
+                        Data[index] = dataId;
+                    }
+                }
+            }
         }
     }
 }
