@@ -1,4 +1,4 @@
-namespace JpgToMinecraftConverter
+namespace JpgToMinecraftConverter.Models
 {
 
     class BlockInfo
