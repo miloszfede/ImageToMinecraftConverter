@@ -23,6 +23,7 @@ class Program
         Rgba32[] pixels = imageProcessor.ExtractPixels(image);
 
         var blockColors = blockMatcher.LoadBlockColors(blocksDirectory);
+
         var blockGrid = blockMatcher.MatchBlocks(pixels, image.Width, image.Height, blockColors);
 
         var blocksToPngs = textureLoader.LoadTextures(blockGrid, blocksDirectory, tileSize);
