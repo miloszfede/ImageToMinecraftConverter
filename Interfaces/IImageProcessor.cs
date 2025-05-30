@@ -3,7 +3,7 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace JpgToMinecraftConverter.Interfaces
 {
-    interface IImageProcessor
+    public interface IImageProcessor
     {
         Image<Rgba32> LoadAndResize(string path, int width, int height);
         Rgba32[] ExtractPixels(Image<Rgba32> image);

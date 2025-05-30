@@ -1,8 +1,8 @@
+using JpgToMinecraftConverter.Models;
+
 namespace JpgToMinecraftConverter.Interfaces
 {
-    using JpgToMinecraftConverter.Models;
-
-    interface ISchematicBuilder
+    public interface ISchematicBuilder
     {
         Schematic Build(string[,] blockGrid, string blockJsonPath);
     }

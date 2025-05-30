@@ -1,6 +1,6 @@
 namespace JpgToMinecraftConverter.Models
 {
-    class Schematic
+    public class Schematic
     {
         public short Width { get; set; }
         public short Height = 1;

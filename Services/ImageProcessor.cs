@@ -1,15 +1,21 @@
+using JpgToMinecraftConverter.Interfaces;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
+
 namespace JpgToMinecraftConverter.Services
 {
-    using JpgToMinecraftConverter.Interfaces;
-    using SixLabors.ImageSharp;
-    using SixLabors.ImageSharp.PixelFormats;
-    using SixLabors.ImageSharp.Processing;
-    using System.Collections.Generic;
 
-    class ImageProcessor : IImageProcessor
+    public class ImageProcessor : IImageProcessor
     {
         public Image<Rgba32> LoadAndResize(string path, int width, int height)
         {
+            if (!File.Exists(path))
+                throw new FileNotFoundException($"Image file not found: {path}");
+
+            if (width <= 0 || height <= 0)
+                throw new ArgumentException("Width and height must be positive values");
+
             var image = Image.Load<Rgba32>(path);
             image.Mutate(x => x.Resize(width, height));
             return image;

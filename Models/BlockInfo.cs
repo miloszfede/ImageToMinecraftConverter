@@ -1,7 +1,7 @@
 namespace JpgToMinecraftConverter.Models
 {
 
-    class BlockInfo
+    public class BlockInfo
     {
         public required string name { get; set; }
         public required string texture_image { get; set; }

@@ -1,19 +1,25 @@
+using JpgToMinecraftConverter.Interfaces;
+using JpgToMinecraftConverter.Models;
+using System.Text.Json;
+
 namespace JpgToMinecraftConverter.Services
 {
-    using JpgToMinecraftConverter.Interfaces;
-    using JpgToMinecraftConverter.Models;
-    using System.Text.Json;
 
     class SchematicBuilder : ISchematicBuilder
     {
         public Schematic Build(string[,] blockGrid, string blockJsonPath)
         {
             var map = new Dictionary<string, (byte, byte)>();
-            var blocks = JsonSerializer.Deserialize<List<BlockInfo>>(File.ReadAllText(blockJsonPath));
-            foreach (var b in blocks)
+            var jsonContent = File.ReadAllText(blockJsonPath);
+            var blocks = JsonSerializer.Deserialize<List<BlockInfo>>(jsonContent);
+
+            if (blocks != null)
             {
-                string name = Path.GetFileNameWithoutExtension(b.texture_image);
-                map[name] = ((byte)b.block_id, (byte)b.data_id);
+                foreach (var b in blocks)
+                {
+                    string name = Path.GetFileNameWithoutExtension(b.texture_image);
+                    map[name] = ((byte)b.block_id, (byte)b.data_id);
+                }
             }
 
             int height = blockGrid.GetLength(0);
